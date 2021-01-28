@@ -3,40 +3,33 @@
 using std::cout;
 using std::endl;
 
-class Base
-{
+class Base {
 public:
-    Base() = default;
-    virtual void print() { cout << "Base"; }
+  Base() = default;
+  virtual void print() { cout << "Base"; }
 };
 
-class Derived : public Base
-{
+class Derived : public Base {
 public:
-    Derived() = default;
-    virtual void print() { cout << "Derived"; }
+  Derived() = default;
+  virtual void print() { cout << "Derived"; }
 };
-
 
 int main() {
+  try {
     try {
-        try {
-            throw Derived{};
-        }
-        catch (Base& b) {
-            cout << "Caught base, which is actually ";
-            b.print();
-            cout << endl;
-            throw;
-        }
+      throw Derived{};
+    } catch (Base &b) {
+      cout << "Caught base, which is actually ";
+      b.print();
+      cout << endl;
+      throw;
     }
-    catch (Base& b) {
-        cout << "Caught base, which is actually ";
-        b.print();
-        cout << endl;
+  } catch (Base &b) {
+    cout << "Caught base, which is actually ";
+    b.print();
+    cout << endl;
+  }
 
-    }
-
-
-    return 0;
+  return 0;
 }

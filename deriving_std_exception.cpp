@@ -3,54 +3,44 @@
 #include <string>
 #include <string_view>
 
-class ArrayException : public std::exception
-{
+class ArrayException : public std::exception {
 private:
-    std::string m_error{};
+  std::string m_error{};
 
 public:
-    ArrayException(std::string_view error)
-        : m_error{ error }
-    {
-    }
+  ArrayException(std::string_view error) : m_error{error} {}
 
-    const char* what() const noexcept override { return m_error.c_str(); }
+  const char *what() const noexcept override { return m_error.c_str(); }
 };
 
-class IntArray
-{
+class IntArray {
 private:
+  int m_data[3];
 
-    int m_data[3];
 public:
-    IntArray() {}
+  IntArray() {}
 
-    int getLength() const { return 3; }
+  int getLength() const { return 3; }
 
-    int& operator[](const int index)
-    {
-        if (index < 0 || index >= getLength())
-            throw ArrayException("Invalid index");
+  int &operator[](const int index) {
+    if (index < 0 || index >= getLength())
+      throw ArrayException("Invalid index");
 
-        return m_data[index];
-    }
-
+    return m_data[index];
+  }
 };
 
-int main()
-{
-    IntArray array;
+int main() {
+  IntArray array;
 
-    try
-    {
-        int value{ array[5] };
-    }
-    catch (const ArrayException& exception) // derived catch blocks go first
-    {
-        std::cerr << "An array exception occurred (" << exception.what() << ")\n";
-    }
-    catch (const std::exception& exception) // not executed
-    {
-        std::cerr << "Some other std::exception occurred (" << exception.what() << ")\n";
-    }
+  try {
+    int value{array[5]};
+  } catch (const ArrayException &exception) // derived catch blocks go first
+  {
+    std::cerr << "An array exception occurred (" << exception.what() << ")\n";
+  } catch (const std::exception &exception) // not executed
+  {
+    std::cerr << "Some other std::exception occurred (" << exception.what()
+              << ")\n";
+  }
 }

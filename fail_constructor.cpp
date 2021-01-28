@@ -35,18 +35,7 @@ public:
     }
 };
 
-
-class Coba
-{
-public:
-    Coba() {
-        cout << "sesuatu" << endl;
-    }
-};
-
 int main() {
-    Coba b;
-    const Coba& p = b;
     try {
         A a{ 0 };
     }

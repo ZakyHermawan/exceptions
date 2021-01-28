@@ -1,6 +1,7 @@
 #include <iostream>
 
 using std::cout;
+using std::cerr;
 using std::endl;
 
 class Member
@@ -34,12 +35,23 @@ public:
     }
 };
 
+
+class Coba
+{
+public:
+    Coba() {
+        cout << "sesuatu" << endl;
+    }
+};
+
 int main() {
+    Coba b;
+    const Coba& p = b;
     try {
         A a{ 0 };
     }
     catch (...) {
-        std::cout << "Error" << endl;
+        cerr << "Error" << endl;
     }
 
 }
